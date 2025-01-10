@@ -70,8 +70,8 @@ namespace CustomMainMenusAPI
 					MainMenuObject.availableObjects.Insert(0, obj);
 
 				// Test
-				spr = Resources.FindObjectsOfTypeAll<Sprite>().First(x => x.GetInstanceID() > 0f && x.name == "ClipBoard_Full");
-				MainMenuObject.CreateMenuObject("Oh hi! Welcome to my super schoolhouse!", spr);
+				//spr = Resources.FindObjectsOfTypeAll<Sprite>().First(x => x.GetInstanceID() > 0f && x.name == "ClipBoard_Full");
+				//MainMenuObject.CreateMenuObject("Oh hi! Welcome to my super schoolhouse!", spr);
 
 				for (int i = 0; i <= 3; i++)
 				{
