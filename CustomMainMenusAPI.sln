@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35431.28
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomMainMenusAPI", "CustomMainMenusAPI.csproj", "{F0FFA8C9-221B-4BEC-A5E2-1F77C0A038F3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F0FFA8C9-221B-4BEC-A5E2-1F77C0A038F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0FFA8C9-221B-4BEC-A5E2-1F77C0A038F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0FFA8C9-221B-4BEC-A5E2-1F77C0A038F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0FFA8C9-221B-4BEC-A5E2-1F77C0A038F3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E3599DBB-1AF5-4193-A9A2-02321154D3C7}
+	EndGlobalSection
+EndGlobal
