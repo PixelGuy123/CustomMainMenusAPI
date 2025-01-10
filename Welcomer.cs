@@ -5,22 +5,14 @@ namespace CustomMainMenusAPI
 {
 	internal class Welcomer : MonoBehaviour
 	{
-		bool played = false;
-		internal void PlayAudio(SoundObject audio, AudioManager src, MainMenu menu)
-		{
-			if (played)
-				return;
-			
-
-			played = true;
+		internal void PlayAudio(SoundObject audio, AudioManager src, MainMenu menu) =>
 			StartCoroutine(WaitForAudioPlay(menu.audioSource, src, audio, menu.gameObject));
-		}
+		
 
 		IEnumerator WaitForAudioPlay(AudioSource menuAud, AudioManager source, SoundObject audio, GameObject menuReference)
 		{
-			yield return null;
-			while (Singleton<MusicManager>.Instance.MidiPlaying)
-				yield return null;
+			yield return new WaitUntil(() => Singleton<MusicManager>.Instance.MidiPlaying);
+			yield return new WaitForSecondsRealtime((float)Singleton<MusicManager>.Instance.MidiPlayer.MPTK_Duration.TotalSeconds - 2f); // Small delay to actually wait for the jingle
 
 			source.QueueAudio(audio);
 

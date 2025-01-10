@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using HarmonyLib;
+﻿using HarmonyLib;
 using UnityEngine;
 using UnityEngine.UI;
-using PixelInternalAPI.Extensions;
 
 namespace CustomMainMenusAPI
 {
@@ -28,7 +26,15 @@ namespace CustomMainMenusAPI
 			if (ActiveObject.audSpeech)
 			{
 				var welcomer = new GameObject(Singleton<LocalizationManager>.Instance.GetLocalizedText(ActiveObject.localizedName) + "_Welcomer").AddComponent<Welcomer>();
-				var newSrc = welcomer.gameObject.CreateAudioManager(55f, 66f).MakeAudioManagerNonPositional();
+				var newSrc = welcomer.gameObject.AddComponent<AudioManager>();
+				newSrc.positional = false;
+
+				newSrc.audioDevice = welcomer.gameObject.AddComponent<AudioSource>();
+				newSrc.audioDevice.minDistance = 65; // yoinked from my PixelInternalAPI, so I don't have to put a whole dependency for a simple AudioManager creation
+				newSrc.audioDevice.maxDistance = 75;
+				newSrc.audioDevice.spatialBlend = 0f;
+				newSrc.audioDevice.rolloffMode = AudioRolloffMode.Logarithmic;
+
 				newSrc.ignoreListenerPause = true;
 				newSrc.audioDevice.playOnAwake = false;
 				welcomer.PlayAudio(ActiveObject.audSpeech, newSrc, __instance);

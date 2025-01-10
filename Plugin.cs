@@ -12,7 +12,9 @@ using TMPro;
 namespace CustomMainMenusAPI
 {
     [BepInPlugin(mod_guid, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
-    internal class CustomMainMenusPlugin : BaseUnityPlugin
+	[BepInDependency("mtm101.rulerp.bbplus.baldidevapi", BepInDependency.DependencyFlags.HardDependency)]
+
+	internal class CustomMainMenusPlugin : BaseUnityPlugin
     {
 		const string mod_guid = "pixelguy.pixelmodding.baldiplus.custommainmenusapi";
 		public static int mainMenuObjIndex = 0;
