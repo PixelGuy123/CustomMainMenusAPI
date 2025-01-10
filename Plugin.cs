@@ -25,8 +25,11 @@ namespace CustomMainMenusAPI
 
 			AssetLoader.LocalizationFromFunction((_) => new()
 			{
-				{"Opt_MainMenus_Desc" , "Switch the available Main Menus in here!"},
-				{"Opt_MainMenus_DefaultMenu" , "BB+ Main Menu"}
+				{"Opt_MainMenus_Desc" , "You can switch the main menus! Just click on the arrows!"},
+				{"Opt_MainMenus_DefaultMenu" , "BB+ Main Menu"},
+				{"Opt_MainMenus_RightToggle" , "Switch to the right."},
+				{"Opt_MainMenus_LeftToggle" , "Switch to the left."},
+				{"Opt_MainMenus_SaveChanges" , "Click here to apply your changes!"}
 			});
 
 			Harmony h = new(mod_guid);
@@ -103,7 +106,8 @@ namespace CustomMainMenusAPI
 			displayText = CreateText("DisplayNameForMenu", MainMenuObject.availableObjects[imaginaryIndex].localizedName, Vector3.zero, MTM101BaldAPI.UI.BaldiFonts.ComicSans24, TextAlignmentOptions.Center, new(300f, 125f), Color.black);
 			indexText = CreateText("IndexDisplay", imaginaryIndex.ToString("D3"), Vector3.down * 45f, MTM101BaldAPI.UI.BaldiFonts.ComicSans24, TextAlignmentOptions.Center, new(64f, 32f), Color.black, false);
 
-			CreateButton(() => // Right arrow
+			
+			AddTooltip(CreateButton(() => // Right arrow
 			{
 				imaginaryIndex++;
 				imaginaryIndex %= MainMenuObject.availableObjects.Count;
@@ -111,9 +115,10 @@ namespace CustomMainMenusAPI
 				displayText.text = Singleton<LocalizationManager>.Instance.GetLocalizedText(MainMenuObject.availableObjects[imaginaryIndex].localizedName);
 				indexText.text = (imaginaryIndex + 1).ToString("D3");
 
-			}, CustomMainMenusPlugin.assetMan.Get<Sprite>("MenuArrowSheet_3"), CustomMainMenusPlugin.assetMan.Get<Sprite>("MenuArrowSheet_1"), "RightTogglerButton", new(45f, -45f), Vector2.one * 32f);
+			}, CustomMainMenusPlugin.assetMan.Get<Sprite>("MenuArrowSheet_3"), CustomMainMenusPlugin.assetMan.Get<Sprite>("MenuArrowSheet_1"), "RightTogglerButton", new(45f, -45f), Vector2.one * 32f),
+			"Opt_MainMenus_RightToggle");
 
-			CreateButton(() => // left arrow
+			AddTooltip(CreateButton(() => // left arrow
 			{
 				imaginaryIndex--;
 				if (imaginaryIndex < 0)
@@ -122,14 +127,15 @@ namespace CustomMainMenusAPI
 				displayText.text = Singleton<LocalizationManager>.Instance.GetLocalizedText(MainMenuObject.availableObjects[imaginaryIndex].localizedName);
 				indexText.text = (imaginaryIndex + 1).ToString("D3");
 
-			}, CustomMainMenusPlugin.assetMan.Get<Sprite>("MenuArrowSheet_2"), CustomMainMenusPlugin.assetMan.Get<Sprite>("MenuArrowSheet_0"), "LeftTogglerButton", new(-45f, -45f), Vector2.one * 32f);
+			}, CustomMainMenusPlugin.assetMan.Get<Sprite>("MenuArrowSheet_2"), CustomMainMenusPlugin.assetMan.Get<Sprite>("MenuArrowSheet_0"), "LeftTogglerButton", new(-45f, -45f), Vector2.one * 32f),
+			"Opt_MainMenus_LeftToggle");
 
-			CreateApplyButton(() =>
+			AddTooltip(CreateApplyButton(() =>
 			{
 				CustomMainMenusPlugin.mainMenuObjIndex = imaginaryIndex;
 				MainMenuPatch.UpdateMenuTexture(CustomMainMenusPlugin.mainMenuObjIndex);
 				ModdedSaveSystem.CallSaveLoadAction(CustomMainMenusPlugin.i, true, ModdedSaveSystem.GetCurrentSaveFolder(CustomMainMenusPlugin.i));
-			});
+			}), "Opt_MainMenus_SaveChanges");
 		}
 
 		TextMeshProUGUI displayText, indexText;
