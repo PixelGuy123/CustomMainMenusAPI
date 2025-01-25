@@ -11,7 +11,8 @@ namespace CustomMainMenusAPI
 
 		IEnumerator WaitForAudioPlay(AudioSource menuAud, AudioManager source, SoundObject audio, GameObject menuReference)
 		{
-			yield return new WaitUntil(() => Singleton<MusicManager>.Instance.MidiPlaying);
+			yield return null;
+			yield return new WaitForEndOfFrame();
 			yield return new WaitForSecondsRealtime((float)Singleton<MusicManager>.Instance.MidiPlayer.MPTK_Duration.TotalSeconds - 2f); // Small delay to actually wait for the jingle
 
 			source.QueueAudio(audio);
