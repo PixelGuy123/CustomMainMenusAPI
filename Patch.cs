@@ -37,7 +37,7 @@ namespace CustomMainMenusAPI
 
 				newSrc.ignoreListenerPause = true;
 				newSrc.audioDevice.playOnAwake = false;
-				welcomer.PlayAudio(ActiveObject.audSpeech, newSrc, __instance);
+				welcomer.PlayAudio(ActiveObject, newSrc, __instance);
 			}
 
 			if (!string.IsNullOrEmpty(ActiveObject.midiName))

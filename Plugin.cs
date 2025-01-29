@@ -17,12 +17,14 @@ namespace CustomMainMenusAPI
 	internal class CustomMainMenusPlugin : BaseUnityPlugin
     {
 		const string mod_guid = "pixelguy.pixelmodding.baldiplus.custommainmenusapi";
-		public static int mainMenuObjIndex = 0;
+		public static int mainMenuObjIndex = 1;
 		internal static AssetManager assetMan = new();
 		public static CustomMainMenusPlugin i;
 
+#pragma warning disable IDE0051 // Remover membros privados não utilizados
 		private void Awake()
-        {
+#pragma warning restore IDE0051 // Remover membros privados não utilizados
+		{
 			i = this;
 
 			AssetLoader.LocalizationFromFunction((_) => new()
@@ -52,7 +54,7 @@ namespace CustomMainMenusAPI
 					return;
 				}
 
-				if (File.Exists(path))
+				if (MainMenuObject.availableObjects.Count != 1 && File.Exists(path))
 				{
 					using BinaryReader reader = new(File.OpenRead(path));
 					mainMenuObjIndex = reader.ReadInt32();
