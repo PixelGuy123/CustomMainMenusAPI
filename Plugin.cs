@@ -61,8 +61,6 @@ namespace CustomMainMenusAPI
 				}
 				else
 					mainMenuObjIndex = 1; // 1 to default to a modded main menu (if available)
-
-				mainMenuObjIndex = Mathf.Clamp(mainMenuObjIndex, 0, System.Math.Max(0, MainMenuObject.availableObjects.Count - 1));
 			});
 
 			// Adds the BB+ main menu to the system

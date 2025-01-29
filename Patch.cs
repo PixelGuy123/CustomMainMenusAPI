@@ -8,11 +8,9 @@ namespace CustomMainMenusAPI
 	internal static class MainMenuPatch // Intentionally public to be changed later with Endless floors
 	{
 
-		internal static void UpdateMenuTexture(int idx)
-		{
+		internal static void UpdateMenuTexture(int idx) =>
 			menu.transform.Find("Image").GetComponent<Image>().sprite = ActiveObject.mainMenuImage;
-			lastIndex = idx;
-		}
+		
 		private static void Postfix(MainMenu __instance)
 		{
 			// Main Menu itself
@@ -44,9 +42,14 @@ namespace CustomMainMenusAPI
 				__instance.transform.GetComponentInChildren<MusicPlayer>().track = ActiveObject.midiName;
 		}
 
-		internal static MainMenuObject ActiveObject => MainMenuObject.availableObjects[CustomMainMenusPlugin.mainMenuObjIndex];
-
-		static int lastIndex = -1;
+		internal static MainMenuObject ActiveObject
+		{
+			get
+			{
+				CustomMainMenusPlugin.mainMenuObjIndex = Mathf.Clamp(CustomMainMenusPlugin.mainMenuObjIndex, 0, System.Math.Max(0, MainMenuObject.availableObjects.Count - 1));
+				return MainMenuObject.availableObjects[CustomMainMenusPlugin.mainMenuObjIndex];
+			}
+		}
 
 		static MainMenu menu;
 	}
