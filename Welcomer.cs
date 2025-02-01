@@ -14,10 +14,15 @@ namespace CustomMainMenusAPI
 			while (Singleton<MusicManager>.Instance.MidiPlayer.MPTK_MidiName != mainMenuObject.midiName)
 				yield return null;
 
+			for (int i = 0; i < 5; i++)
+				yield return new WaitForEndOfFrame(); // Extra frame delay bc the midiplayer takes a time to update apparently
+
 			float delay = (float)Singleton<MusicManager>.Instance.MidiPlayer.MPTK_Duration.TotalSeconds - 2f;
+			//Debug.Log($"Name is: {Singleton<MusicManager>.Instance.MidiPlayer.MPTK_MidiName} starting delay: " + delay);
 			while (delay > 0f)
 			{
 				delay -= Time.unscaledDeltaTime;
+				//Debug.Log("Delay is: " + delay);
 				yield return null;
 			}
 
